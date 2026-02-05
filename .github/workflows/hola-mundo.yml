@@ -1,20 +1,23 @@
-name: hola-mundo-python
+name: hola-mundo-python # nome do workflow que vai ser executado
+run-name: "Estoy aprendiendo GitHub Actions" # nome do run do workflow que vai ser executado
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-jobs:
-  build:
-    runs-on: ubuntu-latest
+on: # Especificar el trigger que va a ser executado para executar o workflow
+  push: # trigger de push para executar o workflow
+    branches: [ "main" ] # quando o push for para a branch main, o workflow sera executado
+  pull_request: # trigger de pull request para executar o workflow
+    branches: [ "main" ] # quando o pull request for para a branch main, o workflow sera executado
+jobs: # Especificar os jobs que vao ser executados para executar o workflow
+  build: # job de build para executar o workflow
+    runs-on: ubuntu-latest # Especificar o runner que vai ser executado para executar o workflow, neste caso ubuntu latest
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.10"
+    steps: # 'steps' sao as tarefas que vao ser executadas para executar o workflow
+    - uses: actions/checkout@v3 # isto é uma action que vai ser executada para executar o workflow, o @v3 é a versao da action
+    - name: Set up Python 3.10  # nome da tarefa que vai ser executada para executar o workflow
+      uses: actions/setup-python@v3 # isto é uma action que vai ser executada para executar o workflow, o @v3 é a versao da action
+      with: # com o 'with' podemos passar parametros para a action
+        python-version: "3.10" # versao do python que vai ser executada para executar o workflow
+    - name: Definir variable de ambiente
+      run: echo "USERNAME=${{ github.actor }}" >> $GITHUB_ENV 
 
-    - name: script-runing
-      run: python hello_world.py
+    - name: script-runing # nome da tarefa que vai ser executada para executar o workflow
+      run: python hello_world.py # comando que vai ser executado para executar o workflow
